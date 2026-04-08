@@ -1,0 +1,33 @@
+{
+  "name": "tradergamesbot",
+  "private": true,
+  "version": "0.1.0",
+  "description": "BUY / SELL Telegram Mini App MVP",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "check": "tsc --noEmit"
+  },
+  "keywords": [
+    "telegram-mini-app",
+    "react",
+    "vite",
+    "game"
+  ],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "typescript": "^6.0.2",
+    "vite": "^8.0.7"
+  }
+}
