@@ -1,16 +1,17 @@
-import type { LeaderboardPreview } from '../types/game';
+import type { PlayerStats } from '../types/game';
 import { useGameApp } from '../app/GameProvider';
 
 interface MiniLeaderboardPreviewProps {
-  leaderboard: LeaderboardPreview | null;
+  stats: PlayerStats;
   onOpen: () => void;
 }
 
 export const MiniLeaderboardPreview = ({
-  leaderboard,
+  stats,
   onOpen,
 }: MiniLeaderboardPreviewProps) => {
   const { t } = useGameApp();
+  const hasSessions = stats.sessionsPlayed > 0;
 
   return (
     <section className="panel-card">
@@ -24,25 +25,20 @@ export const MiniLeaderboardPreview = ({
         </button>
       </div>
 
-      <div className="leaderboard-preview">
-        {leaderboard?.entries.slice(0, 3).map((entry) => (
-          <div className="leaderboard-row" key={entry.id}>
-            <span>#{entry.rank}</span>
-            <strong>{entry.name === 'you' ? t('common.you') : entry.name}</strong>
-            <span>{entry.score}</span>
+      {hasSessions ? (
+        <div className="stats-preview-grid">
+          <div>
+            <span>{t('leaderboard.sessionsPlayed')}</span>
+            <strong>{stats.sessionsPlayed}</strong>
           </div>
-        ))}
-      </div>
-
-      {leaderboard ? (
-        <div className="leaderboard-row leaderboard-row--player">
-          <span>#{leaderboard.playerEntry.rank}</span>
-          <strong>
-            {leaderboard.playerEntry.name === 'you'
-              ? t('common.you')
-              : leaderboard.playerEntry.name}
-          </strong>
-          <span>{leaderboard.playerEntry.score}</span>
+          <div>
+            <span>{t('leaderboard.bestScore')}</span>
+            <strong>{stats.bestScore}</strong>
+          </div>
+          <div>
+            <span>{t('leaderboard.accuracy')}</span>
+            <strong>{stats.accuracy}%</strong>
+          </div>
         </div>
       ) : (
         <p className="panel-card__placeholder">{t('leaderboard.empty')}</p>

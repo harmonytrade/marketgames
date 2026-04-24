@@ -1,6 +1,5 @@
-import { MOCK_LEADERBOARD } from '../data/mockLeaderboard';
 import { MOCK_ROUNDS } from '../data/mockRounds';
-import type { LeaderboardService, RoundSource } from '../types/game';
+import type { RoundSource } from '../types/game';
 
 const shuffle = <T,>(items: T[]) => {
   const clone = [...items];
@@ -18,15 +17,5 @@ const shuffle = <T,>(items: T[]) => {
 export const mockRoundSource: RoundSource = {
   async getSessionRounds(count) {
     return shuffle(MOCK_ROUNDS).slice(0, count);
-  },
-};
-
-export const mockLeaderboardService: LeaderboardService = {
-  async getTopEntries() {
-    return MOCK_LEADERBOARD;
-  },
-
-  async getPlacement(score) {
-    return MOCK_LEADERBOARD.filter((entry) => entry.score > score).length + 1;
   },
 };

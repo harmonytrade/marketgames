@@ -43,5 +43,6 @@ export const STORAGE_KEYS = {
   bestScore: 'buy-sell.best-score',
   hasCompletedWelcome: 'buy-sell.has-completed-welcome',
   lastSessionSummary: 'buy-sell.last-session-summary',
+  playerStats: 'buy-sell.player-stats',
   locale: 'buy-sell.locale',
 };

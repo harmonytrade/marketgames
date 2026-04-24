@@ -77,28 +77,26 @@ export interface SessionSummary {
   accuracy: number;
 }
 
-export interface LeaderboardEntry {
+export interface SessionHistoryEntry extends SessionSummary {
   id: string;
-  name: string;
-  score: number;
-  badgeKey: BadgeKey;
-  rank: number;
-  streak?: number;
-  isPlayer?: boolean;
+  playedAt: string;
 }
 
-export interface LeaderboardPreview {
-  entries: LeaderboardEntry[];
-  playerEntry: LeaderboardEntry;
+export interface PlayerStats {
+  sessionsPlayed: number;
+  totalScore: number;
+  bestScore: number;
+  averageScore: number;
+  bestStreak: number;
+  totalCorrect: number;
+  totalRounds: number;
+  accuracy: number;
+  lastScore: number;
+  recentSessions: SessionHistoryEntry[];
 }
 
 export interface RoundSource {
   getSessionRounds(count: number): Promise<GameRound[]>;
-}
-
-export interface LeaderboardService {
-  getTopEntries(): Promise<LeaderboardEntry[]>;
-  getPlacement(score: number): Promise<number>;
 }
 
 export interface GameSessionState {

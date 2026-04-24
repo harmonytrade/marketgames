@@ -7,7 +7,7 @@ The current release is:
 - Russian-first with English fallback
 - frontend-only
 - ready for Telegram embedding
-- still using a demo leaderboard until a backend is connected
+- using real local player stats until a shared backend is connected
 
 ## Stack
 
@@ -15,7 +15,7 @@ The current release is:
 - TypeScript
 - Vite
 - Local mock rounds
-- Mock leaderboard service behind an interface
+- Local player stats stored in the browser
 
 ## Local Development
 
@@ -84,13 +84,13 @@ Included in this release:
 - score and streak logic
 - animated round feedback
 - premium result card with share flow
-- demo leaderboard preview
+- real local player stats and recent sessions
 - signals funnel screen for channel and bot
 - Telegram bridge with browser-safe fallback outside Telegram
 - Russian localization with English fallback
 
 Not included yet:
-- real leaderboard backend
+- shared leaderboard backend
 - analytics
 - Telegram auth / secure user identity
 - live market data
@@ -118,7 +118,7 @@ Important files:
 - [src/utils/share.ts](/Users/nikitapranchuk/Documents/tradergamesbot/src/utils/share.ts): localized share text and share handoff
 - [src/i18n/index.ts](/Users/nikitapranchuk/Documents/tradergamesbot/src/i18n/index.ts): localization resolver and translator
 - [src/data/mockRounds.ts](/Users/nikitapranchuk/Documents/tradergamesbot/src/data/mockRounds.ts): mock round bank
-- [src/data/mockLeaderboard.ts](/Users/nikitapranchuk/Documents/tradergamesbot/src/data/mockLeaderboard.ts): demo leaderboard seed
+- [src/game/player-stats.ts](/Users/nikitapranchuk/Documents/tradergamesbot/src/game/player-stats.ts): local player stats aggregation
 
 ## Telegram Mini App Integration
 
@@ -230,7 +230,7 @@ The pattern label is shown only after the player answers, so it teaches the roun
 
 ## Known TODOs
 
-- replace the mock leaderboard with a backend service
+- connect shared friend/global stats when a backend is available
 - add analytics and crash reporting
 - add Telegram start parameter tracking
 - add rendered share card generation

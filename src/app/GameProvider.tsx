@@ -14,11 +14,11 @@ import {
   SIGNAL_LINKS,
   STORAGE_KEYS,
 } from '../game/config';
-import { buildLeaderboardPreview } from '../game/selectors';
-import { mockLeaderboardService, mockRoundSource } from '../game/services';
+import { createInitialPlayerStats, updatePlayerStats } from '../game/player-stats';
+import { mockRoundSource } from '../game/services';
 import { useGameSession } from '../hooks/useGameSession';
 import { usePersistentState } from '../hooks/usePersistentState';
-import type { LeaderboardPreview, Screen, SessionSummary } from '../types/game';
+import type { PlayerStats, Screen, SessionSummary } from '../types/game';
 import type { AppLocale, Translator } from '../i18n';
 import { createTranslator, resolveLocale } from '../i18n';
 import { shareSessionResult } from '../utils/share';
@@ -42,7 +42,7 @@ interface GameContextValue {
   isTelegram: boolean;
   bestScore: number;
   lastSessionSummary: SessionSummary | null;
-  leaderboardPreview: LeaderboardPreview | null;
+  playerStats: PlayerStats;
   toast: ToastState | null;
   session: ReturnType<typeof useGameSession>;
   goToMenu: () => void;
@@ -82,8 +82,14 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     STORAGE_KEYS.lastSessionSummary,
     null,
   );
+  const [playerStats, setPlayerStats] = usePersistentState<PlayerStats>(
+    STORAGE_KEYS.playerStats,
+    {
+      ...createInitialPlayerStats(),
+      bestScore,
+    },
+  );
   const [screen, setScreen] = useState<Screen>(() => getInitialScreen(hasCompletedWelcome));
-  const [leaderboardPreview, setLeaderboardPreview] = useState<LeaderboardPreview | null>(null);
   const [isLoadingSession, setIsLoadingSession] = useState(false);
   const [toast, setToast] = useState<ToastState | null>(null);
   const t = useMemo(() => createTranslator(locale), [locale]);
@@ -135,24 +141,6 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
   }, [screen, telegramBridge]);
 
   useEffect(() => {
-    const refreshLeaderboard = async () => {
-      try {
-        const entries = await mockLeaderboardService.getTopEntries();
-        const placement = await mockLeaderboardService.getPlacement(
-          lastSessionSummary?.score ?? bestScore,
-        );
-        setLeaderboardPreview(
-          buildLeaderboardPreview(entries, lastSessionSummary, bestScore, placement),
-        );
-      } catch {
-        setLeaderboardPreview(null);
-      }
-    };
-
-    void refreshLeaderboard();
-  }, [bestScore, lastSessionSummary]);
-
-  useEffect(() => {
     if (!session.roundResult) {
       return;
     }
@@ -172,17 +160,19 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       return;
     }
 
-    const summaryKey = `${session.sessionResult.score}:${session.sessionResult.correctAnswers}:${session.sessionResult.bestStreak}`;
+    const sessionResult = session.sessionResult;
+    const summaryKey = `${sessionResult.score}:${sessionResult.correctAnswers}:${sessionResult.bestStreak}`;
 
     if (handledSessionKeyRef.current === summaryKey) {
       return;
     }
 
     handledSessionKeyRef.current = summaryKey;
-    setLastSessionSummary(session.sessionResult);
+    setLastSessionSummary(sessionResult);
+    setPlayerStats((currentStats) => updatePlayerStats(currentStats, sessionResult));
 
-    if (session.sessionResult.score > bestScore) {
-      setBestScore(session.sessionResult.score);
+    if (sessionResult.score > bestScore) {
+      setBestScore(sessionResult.score);
     }
 
     startTransition(() => {
@@ -190,7 +180,15 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     });
 
     telegramBridge.impact('heavy');
-  }, [bestScore, session.phase, session.sessionResult, setBestScore, setLastSessionSummary, telegramBridge]);
+  }, [
+    bestScore,
+    session.phase,
+    session.sessionResult,
+    setBestScore,
+    setLastSessionSummary,
+    setPlayerStats,
+    telegramBridge,
+  ]);
 
   const startGame = async () => {
     setIsLoadingSession(true);
@@ -266,7 +264,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     isTelegram: telegramBridge.isAvailable,
     bestScore,
     lastSessionSummary,
-    leaderboardPreview,
+    playerStats,
     toast,
     session,
     goToMenu() {

@@ -8,11 +8,11 @@ export const MainMenuScreen = () => {
     bestScore,
     isLoadingSession,
     lastSessionSummary,
-    leaderboardPreview,
     openBot,
     openChannel,
     openLeaderboard,
     openSignals,
+    playerStats,
     startGame,
     t,
   } = useGameApp();
@@ -60,7 +60,7 @@ export const MainMenuScreen = () => {
           </button>
         </section>
 
-        <MiniLeaderboardPreview leaderboard={leaderboardPreview} onOpen={openLeaderboard} />
+        <MiniLeaderboardPreview stats={playerStats} onOpen={openLeaderboard} />
 
         <section className="panel-card">
           <div className="panel-card__header">
