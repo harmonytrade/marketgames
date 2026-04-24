@@ -191,6 +191,7 @@ Critical launch checks:
 - session always completes exactly 10 rounds
 - BUY / SELL cannot be double-scored by fast tapping
 - timeout works after returning from background
+- round feedback remains visible long enough to read the explanation
 - result share works in Telegram and falls back outside Telegram
 - channel and bot links open in both environments
 - Russian text fits on small devices

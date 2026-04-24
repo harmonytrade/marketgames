@@ -7,8 +7,8 @@ const buildMiniAppLink = (botUsername: string, appShortName: string) =>
   botUsername && appShortName ? `https://t.me/${botUsername}/${appShortName}` : '';
 
 export const SESSION_ROUNDS = 10;
-export const DECISION_MS = 3000;
-export const REVEAL_MS = 1200;
+export const DECISION_MS = 2500;
+export const REVEAL_MS = 2800;
 export const CORRECT_POINTS = 10;
 export const PERFECT_POINTS = 15;
 export const PERFECT_MOVE_THRESHOLD = 0.05;
