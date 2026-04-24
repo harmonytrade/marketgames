@@ -25,6 +25,18 @@ export type GamePhase = 'idle' | 'decision' | 'reveal' | 'complete';
 
 export type VolatilityTag = 'calm' | 'active' | 'wild';
 
+export type TechnicalPatternKey =
+  | 'resistanceBreakout'
+  | 'supportBreakdown'
+  | 'falseBreakout'
+  | 'failedRetest'
+  | 'trendContinuation'
+  | 'rollover'
+  | 'whipsaw'
+  | 'reclaim'
+  | 'grindTrend'
+  | 'lateRamp';
+
 export type BadgeKey =
   | 'signalSniper'
   | 'trendHunter'
@@ -38,6 +50,7 @@ export interface GameRound {
   postPoints: number[];
   correctDirection: PlayerAction;
   volatility: VolatilityTag;
+  patternKey: TechnicalPatternKey;
   labelKey?: string;
   feedbackToneHint?: FeedbackToneHint;
 }
@@ -49,6 +62,7 @@ export interface RoundResolution {
   multiplier: number;
   isCorrect: boolean;
   explanationKey: string;
+  patternKey: TechnicalPatternKey;
   direction: PlayerAction;
   action: PlayerAction | null;
   deltaPercent: number;

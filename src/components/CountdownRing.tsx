@@ -1,9 +1,12 @@
+import { useGameApp } from '../app/GameProvider';
+
 interface CountdownRingProps {
   value: number;
   max: number;
 }
 
 export const CountdownRing = ({ value, max }: CountdownRingProps) => {
+  const { t } = useGameApp();
   const radius = 22;
   const circumference = 2 * Math.PI * radius;
   const progress = Math.max(0, Math.min(1, value / max));
@@ -27,7 +30,7 @@ export const CountdownRing = ({ value, max }: CountdownRingProps) => {
       </svg>
       <div className="countdown-ring__label">
         <strong>{Math.max(0, value / 1000).toFixed(1)}</strong>
-        <span>s</span>
+        <span>{t('common.secondsShort')}</span>
       </div>
     </div>
   );

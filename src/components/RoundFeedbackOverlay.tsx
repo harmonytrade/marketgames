@@ -39,6 +39,9 @@ export const RoundFeedbackOverlay = ({
         <span>
           {t('game.move')}: {directionLabel}
         </span>
+        <span>
+          {t('game.pattern')}: {t(`patterns.${resolution.patternKey}`)}
+        </span>
       </div>
     </div>
   );

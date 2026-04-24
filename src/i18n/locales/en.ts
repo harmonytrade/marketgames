@@ -9,6 +9,7 @@ export const en = {
     loading: 'Loading...',
     you: 'You',
     demo: 'MVP Preview',
+    secondsShort: 's',
   },
   meta: {
     description:
@@ -18,9 +19,10 @@ export const en = {
     pill: 'Fast market reflex game',
     hook: 'Read the move. Pick a side. Find out fast.',
     preview: 'Live preview',
-    chooseIn: '2.5s to choose',
+    chooseIn: '3s to choose',
     hiddenMove: 'The hidden move decides the outcome.',
     rounds: 'rounds',
+    decisionTime: '3s',
     decide: 'to decide',
     shareable: 'shareable score',
     start: 'Start Game',
@@ -68,6 +70,7 @@ export const en = {
     picked: 'Picked',
     noTap: 'No tap',
     move: 'Move',
+    pattern: 'Pattern',
   },
   feedback: {
     perfect: 'Perfect',
@@ -158,6 +161,18 @@ export const en = {
     calm: 'calm',
     active: 'active',
     wild: 'wild',
+  },
+  patterns: {
+    resistanceBreakout: 'Resistance breakout',
+    supportBreakdown: 'Support breakdown',
+    falseBreakout: 'False breakout',
+    failedRetest: 'Failed retest',
+    trendContinuation: 'Trend continuation',
+    rollover: 'Rollover',
+    whipsaw: 'Whipsaw reversal',
+    reclaim: 'Level reclaim',
+    grindTrend: 'Grinding trend',
+    lateRamp: 'Late momentum ramp',
   },
   roundLabels: {
     btcBreakoutSqueeze: 'Momentum squeeze lifted hard into the close.',

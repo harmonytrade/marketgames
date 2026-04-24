@@ -9,6 +9,7 @@ export const ru = {
     loading: 'Загрузка...',
     you: 'Вы',
     demo: 'MVP-превью',
+    secondsShort: 'с',
   },
   meta: {
     description:
@@ -18,9 +19,10 @@ export const ru = {
     pill: 'Игра на реакцию по графику',
     hook: 'Посмотри на движение. Выбери сторону. Узнай результат сразу.',
     preview: 'Превью рынка',
-    chooseIn: '2,5 сек на выбор',
+    chooseIn: '3 сек на выбор',
     hiddenMove: 'Скрытое продолжение решает исход.',
     rounds: 'раундов',
+    decisionTime: '3с',
     decide: 'на решение',
     shareable: 'результат для шаринга',
     start: 'Начать',
@@ -68,6 +70,7 @@ export const ru = {
     picked: 'Выбор',
     noTap: 'без ответа',
     move: 'Движение',
+    pattern: 'Паттерн',
   },
   feedback: {
     perfect: 'Идеально',
@@ -158,6 +161,18 @@ export const ru = {
     calm: 'спокойно',
     active: 'активно',
     wild: 'резко',
+  },
+  patterns: {
+    resistanceBreakout: 'Пробой сопротивления',
+    supportBreakdown: 'Пробой поддержки',
+    falseBreakout: 'Ложный пробой',
+    failedRetest: 'Проваленный ретест',
+    trendContinuation: 'Продолжение тренда',
+    rollover: 'Истощение роста',
+    whipsaw: 'Резкий разворот',
+    reclaim: 'Возврат уровня',
+    grindTrend: 'Плавный тренд',
+    lateRamp: 'Поздний импульс',
   },
   roundLabels: {
     btcBreakoutSqueeze: 'Сжатие импульса резко вытолкнуло цену вверх.',

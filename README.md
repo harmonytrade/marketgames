@@ -196,6 +196,24 @@ Critical launch checks:
 - Russian text fits on small devices
 - `npm run build` passes before every release
 
+## Technical Analysis Patterns
+
+The MVP round bank uses synthetic chart snippets, not live or historical market data. Each snippet is now tagged with a common technical-analysis archetype, so the post-round feedback explains the setup instead of feeling arbitrary.
+
+Included archetypes:
+- resistance breakout
+- support breakdown
+- false breakout
+- failed retest
+- trend continuation
+- rollover
+- whipsaw reversal
+- level reclaim
+- grinding trend
+- late momentum ramp
+
+The pattern label is shown only after the player answers, so it teaches the round without giving away the decision.
+
 ## Publishing Plan
 
 1. `npm run build`

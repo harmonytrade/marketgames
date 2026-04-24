@@ -112,6 +112,7 @@ export const createRoundResolution = (
     multiplier,
     isCorrect: outcome === 'perfect' || outcome === 'correct',
     explanationKey: getExplanation(round, tone),
+    patternKey: round.patternKey,
     direction: round.correctDirection,
     action,
     deltaPercent: getRoundDeltaPercent(round),

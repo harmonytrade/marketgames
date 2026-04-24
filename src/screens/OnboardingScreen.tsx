@@ -4,7 +4,7 @@ import { useGameApp } from '../app/GameProvider';
 
 export const OnboardingScreen = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const { finishOnboarding, t } = useGameApp();
+  const { finishOnboarding, isLoadingSession, t } = useGameApp();
   const slides = useMemo(
     () => [
       {
@@ -40,6 +40,7 @@ export const OnboardingScreen = () => {
           <p className="eyebrow">{slide.eyebrow}</p>
           <button
             className="button button--ghost button--tiny"
+            disabled={isLoadingSession}
             onClick={() => {
               void finishOnboarding();
             }}
@@ -67,6 +68,7 @@ export const OnboardingScreen = () => {
 
         <button
           className="button button--primary"
+          disabled={isLoadingSession}
           onClick={() => {
             if (isLastSlide) {
               void finishOnboarding();
@@ -77,7 +79,7 @@ export const OnboardingScreen = () => {
           }}
           type="button"
         >
-          {isLastSlide ? t('onboarding.start') : t('common.next')}
+          {isLoadingSession ? t('common.loading') : isLastSlide ? t('onboarding.start') : t('common.next')}
         </button>
       </div>
     </section>

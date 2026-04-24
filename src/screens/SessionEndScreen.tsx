@@ -6,6 +6,7 @@ import { useGameApp } from '../app/GameProvider';
 export const SessionEndScreen = () => {
   const {
     lastSessionSummary,
+    isLoadingSession,
     openBot,
     openChannel,
     openLeaderboard,
@@ -34,12 +35,13 @@ export const SessionEndScreen = () => {
         <div className="result-actions">
           <button
             className="button button--primary"
+            disabled={isLoadingSession}
             onClick={() => {
               void startGame();
             }}
             type="button"
           >
-            {t('results.playAgain')}
+            {isLoadingSession ? t('common.loading') : t('results.playAgain')}
           </button>
           <button className="button button--secondary" onClick={() => void shareLatestResult()} type="button">
             {t('results.share')}

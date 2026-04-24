@@ -40,7 +40,7 @@ export const WelcomeScreen = () => {
             <span>{t('welcome.rounds')}</span>
           </div>
           <div>
-            <strong>2.5s</strong>
+            <strong>{t('welcome.decisionTime')}</strong>
             <span>{t('welcome.decide')}</span>
           </div>
           <div>
